@@ -1,54 +1,23 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+import requests
+import json
 
-import sys
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
+api = requests.get("https://covid19-brazil-api.vercel.app/api/report/v1/")
 
-class MainWindow(QMainWindow):
-    def __init__(self):
-        super().__init__()
+dados = api
+dados = json.loads(dados.text)
 
-        self.setWindowTitle('Janelão')
-        self.setFixedSize(1200,600)
-        
-        
+nome = str(input("Digite o estado: "))
 
-        self.window = QWidget()
-        self.window.setStyleSheet("background-color: #B0C4DE;")
-        self.setCentralWidget(self.window)
+total = []
 
-        self.topo = QLabel("COVID-19",self)
-        self.topo.resize(1200,150)
-        self.topo.setStyleSheet('*{background-color: #4169E1; font-size: 25px; padding: 10px;}')
+for estados in dados["data"]:
+    if estados["state"] == nome:
+        print(f'\nCasos em {nome}: \nContaminados: {estados["cases"]}\nSuspeitos: {estados["suspects"]}\nMortes: {estados["deaths"]}')
 
-        self.cb = QComboBox(self)
-        self.cb.resize(300,35)
-        self.cb.move(440,480)
-        self.cb.addItem('Teste')
-        self.cb.addItems(["Brasil","Estados Unidos", "França","Japão"])
+for estados in dados["data"]:
+    total.append(estados["cases"])
 
-        
-        self.infectado = QLabel("XX XXX XXX",self)
-        self.infectado.resize(400,200)
-        self.infectado.move(0,200)
-        self.infectado.setStyleSheet('*{background-color: #D3D3D3; font-size: 25px; padding: 10px;}')
-        
-        self.recuperado = QLabel("XX XXX XXX",self)
-        self.recuperado.resize(400,200)
-        self.recuperado.move(402,200)
-        self.recuperado.setStyleSheet('*{background-color: #D3D3D3; font-size: 25px; padding: 10px;}')
-        
-        self.morto = QLabel("XX XXX XXX",self)
-        self.morto.resize(400,200)
-        self.morto.move(804,200)
-        self.morto.setStyleSheet('*{background-color: #D3D3D3; font-size: 25px; padding: 10px;}')
+print(f'Valor total no Brazil: {sum(total)}')
 
-
-    
-
-app = QApplication(sys.argv)
-window = MainWindow()
-window.show()
-app.exec()
+# for estados in dados["data"]:
+#     print(estados["state"])
