@@ -34,7 +34,7 @@ class Covid(QMainWindow, Ui_MainWindow):
         
         self.pais = str(self.combo.currentText())
         self.combo.activated.connect(self.get_info)
-        pixmap = QPixmap("covid19/virus.png")
+        pixmap = QPixmap("virus.png")
         self.label_6.setPixmap(pixmap)
         
 

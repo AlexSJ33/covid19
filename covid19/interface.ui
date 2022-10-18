@@ -196,7 +196,7 @@ font-size: 25px;</string>
 font-size: 25px;</string>
      </property>
      <property name="text">
-      <string>Recuperados</string>
+      <string>Suspeitos</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_8">
@@ -390,7 +390,7 @@ font-size: 25px;</string>
 font-size: 17px;</string>
     </property>
     <property name="text">
-     <string>Selecione o pais</string>
+     <string>Selecione o Estado</string>
     </property>
    </widget>
    <widget class="QComboBox" name="combo">
